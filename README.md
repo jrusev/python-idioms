@@ -108,6 +108,11 @@ Get all even numbers from a list located at even indexes
 [x for x in arr[::2] if x%2 == 0]
 ```
 
+Simplify Chained Comparison
+```python
+x < y <= z # equivalent to: x < y and y <= z
+```
+
 Zipping and Unzipping
 ```python
 a = [1, 2, 3]
