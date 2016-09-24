@@ -104,8 +104,16 @@ print a
 ```
 
 Get all even numbers from a list located at even indexes
-```
+```python
 [x for x in arr[::2] if x%2 == 0]
+```
+
+Get the first item from an iterable matching a condition
+```python
+print next((x for x in (1,2,3) if x > 1), None)
+# 2
+print next((x for x in (1,2,3) if x > 3), None)
+# None
 ```
 
 Simplify Chained Comparison
