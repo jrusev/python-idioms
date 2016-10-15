@@ -290,6 +290,28 @@ SUITS = ('Clubs', 'Diamonds', 'Hearts', 'Spades')
 DECK = tuple(Card(*card) for card in product(RANKS, SUITS))
 ```
 
+Interpose
+```python
+from itertools import islice, chain, repeat
+
+def interpose(seq, sep):
+    """Introduce sep between each pair of elements in seq."""
+    return islice(chain.from_iterable(zip(repeat(sep), seq)), 1, None)
+
+list(interpose([1, 2, 3], '-'))
+# [1, '-', 2, '-', 3]
+
+def interpose(seq, sep):
+    result = []
+    for x in seq:
+        result.extend([x, sep])
+    return result[:-1]
+
+interpose([1, 2, 3], '-')
+# [1, '-', 2, '-', 3]
+```
+
+
 Classes
 ```python
 class Person(object):
