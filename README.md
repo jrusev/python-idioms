@@ -582,3 +582,11 @@ if __name__ == "__main__":
     initial_board = {(0, 1), (1, 2), (2, 0), (2, 1), (2, 2)}
     print list(islice(iterations(initial_board), 10))
 ```
+
+Enum
+```
+class Color:
+    RED, GREEN, BLUE = range(3)
+
+Color.GREEN # 1
+```
