@@ -89,6 +89,15 @@ except ValueError:
     return None
 ```
 
+Find substring
+```python
+'hello world'.find('world') # 6
+'hello world'.index('world') # 6
+
+'hello world'.find('peace') # -1
+'hello world'.index('peace') # ValueError: substring not found
+```
+
 List slice assignment
 ```python
 a = [1, 2, 3, 4, 5]
