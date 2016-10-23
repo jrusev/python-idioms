@@ -521,6 +521,26 @@ heapq.nlargest(5, a)
 # [100, 100, 99, 98, 98]
 ```
 
+k-th largest with min-heap
+```python
+from heapq import heappop, heappush, nlargest
+import random
+
+def select(arr, k):
+    """Return the k-th largest element in arr."""
+    heap = []
+    for x in arr:
+        if len(heap) < k or x > heap[0]:
+            if len(heap) == k: heappop(heap)
+            heappush(heap, x)
+    return heap[0]
+
+n = 1000
+k = 10
+arr = random.sample(range(n), n)
+assert select(arr, k) == nlargest(k, arr)[-1] == 990
+```
+
 Generators and Coroutines
 ```python
 # Generator
