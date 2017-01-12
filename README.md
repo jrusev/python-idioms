@@ -11,7 +11,7 @@ l = [0,1,2,3,4,5]
 rev = l[::-1]
 
 # Get an iterator that walks the original list in reverse order.
-rev = reversed(l)
+print list(x for x in reversed(l))
 
 # Reverse in place.
 l.reverse()
@@ -21,7 +21,7 @@ Add element(s) to a list.
 ```python
 # Append an item to the end.
 a = [1, 2, 3]
-a.append([4, 5])
+a.append([4, 5]) # returns None
 print a
 # [1, 2, 3, [4, 5]]
 
@@ -41,16 +41,16 @@ print a
 Remove element from a list.
 ```python
 # To remove an element's first occurrence in a list:
-a = ['a', 'b', 'c', 'd']
+a = ['a', 'b', 'c', 'b']
 a.remove('b')
 print a
-# ['a', 'c', 'd']
+# ['a', 'c', 'b']
 
 # Remove all occurences of an element in a list.
-a = [1, 2, 3, 4, 2, 3, 4, 2, 7, 2]
+a = [1, 2, 3, 4, 2]
 a = [x for x in a if x != 2]
 print a
-# [1, 3, 4, 3, 4, 7]
+# [1, 3, 4]
 
 # Remove element by index.
 a = ['a', 'b', 'c', 'd']
@@ -104,10 +104,10 @@ a = [1, 2, 3, 4, 5]
 a[2:3] = [0, 0]
 print a
 # [1, 2, 0, 0, 4, 5]
-a[1:1] = [8, 9]
+a[1:1] = [8, 9] # insert
 print a
 # [1, 8, 9, 2, 0, 0, 4, 5]
-a[1:-1] = []
+a[1:-1] = [] # delete
 print a
 # [1, 5]
 ```
@@ -199,20 +199,29 @@ for name in names:
     d[key].append(name)
 
 # {5: ['roger', 'betty'], 6: ['rachel', 'judith'], 7: ['raymond', 'matthew', 'melissa', 'charlie']}
+
+# Or just using the standard dict:
+d = {}
+for name in names:
+    key = len(name)
+    if key not in d: d[key] = []
+    d[key].append(name)
 ```
 
 Sort characters in a string by frequency
 ```python
 from collections import Counter
-str = 'Mississippi'
-dict = Counter(str)
+text = 'Mississippi'
+
+dict = Counter(text)
 sorted(dict.items(), key=lambda x: -x[1])
 # [('i', 4), ('s', 4), ('p', 2), ('M', 1)]
-```
 
-```python
-str = 'Mississippi'
-sorted((-str.count(w), w) for w in set(str))
+Counter(text).most_common()
+# [('i', 4), ('s', 4), ('p', 2), ('M', 1)]
+
+text = 'Mississippi'
+sorted((-text.count(w), w) for w in set(text))
 # [(-4, 'i'), (-4, 's'), (-2, 'p'), (-1, 'M')]
 ```
 
@@ -227,12 +236,12 @@ with open('alice.txt') as f:
 
 Remove all spaces from string
 ```python
-str = str.replace(' ', '')
+text = text.replace(' ', '')
 ```
 
 Remove all whitespace characters (space, tab, newline, and so on)
 ```python
-str = ''.join(str.split())
+text = ''.join(text.split())
 ```
 
 Split text
@@ -313,7 +322,7 @@ list(interpose([1, 2, 3], '-'))
 def interpose(seq, sep):
     result = []
     for x in seq:
-        result.extend([x, sep])
+        result += [x, sep]
     return result[:-1]
 
 interpose([1, 2, 3], '-')
@@ -365,7 +374,7 @@ from bs4 import BeautifulSoup
 URL = 'https://www.tradeo.com/'
 html = requests.get(URL).text
 doc = BeautifulSoup(html)
-links = (element.get('href') for element in doc.find_all('a'))
+links = (anchor_tag.get('href') for anchor_tag in doc.find_all('a'))
 print('\n'.join(sorted(links)))
 ```
 
@@ -385,13 +394,21 @@ print(decoded)
 # comprehensions
 ```
 
+Print the alphabet
+```python
+print ''.join(chr(i) for i in range(ord('a'),ord('z')+1))
+
+import string
+print string.lowercase
+```
+
 Dict Comprehensions
 ```python
-d = {i : chr(65+i) for i in range(4)}
-# {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
+d = {i+1 : chr(ord('A')+i) for i in range(4)}
+# {1: 'A', 2: 'B', 3: 'C', 4: 'D'}
 
 d_inverted = {v:k for k, v in d.items()}
-# {'A': 0, 'C': 2, 'B': 1, 'D': 3}
+# {'A': 1, 'C': 3, 'B': 2, 'D': 4}
 
 ships = [
   {'id': 0, 'model': 'T-65B X-wing'},
@@ -457,11 +474,22 @@ def func(arg1, arg2):
 
 Fibonacci
 ```python
-def fibonacci(n):
-    x, y = 0, 1
+def fib_gen(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+print(list(fib_gen(10))) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+def fib(n):
+    if n < 2: return n
+    a, b = 0, 1
     for i in range(n):
-        print x
-        x, y = y, x + y
+        a, b = b, a + b
+    return a
+
+print([fib(i) for i in range(10)]) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
 Implement `itertools.islice(iterable, start, stop[, step])`
@@ -609,7 +637,8 @@ def iterations(board):
 
 if __name__ == "__main__":
     initial_board = {(0, 1), (1, 2), (2, 0), (2, 1), (2, 2)}
-    print list(islice(iterations(initial_board), 10))
+    for board in islice(iterations(initial_board), 10):
+        print board
 ```
 
 Enum
