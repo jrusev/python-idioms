@@ -483,9 +483,8 @@ def fib_gen(n):
 print(list(fib_gen(10))) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 def fib(n):
-    if n < 2: return n
     a, b = 0, 1
-    for i in range(n):
+    for _ in range(n):
         a, b = b, a + b
     return a
 
