@@ -11,7 +11,7 @@ l = [0,1,2,3,4,5]
 rev = l[::-1]
 
 # Get an iterator that walks the original list in reverse order.
-print list(x for x in reversed(l))
+print list(x*2 for x in reversed(l))
 
 # Reverse in place.
 l.reverse()
@@ -366,18 +366,6 @@ else:
     print('Strange, sqrt(-1) did not raise and error!')
 ```
 
-Scrape all links from a web page
-```python
-import requests
-from bs4 import BeautifulSoup
-
-URL = 'https://www.tradeo.com/'
-html = requests.get(URL).text
-doc = BeautifulSoup(html)
-links = (anchor_tag.get('href') for anchor_tag in doc.find_all('a'))
-print('\n'.join(sorted(links)))
-```
-
 Split array into chunks
 ```python
 # Encode the message (convert characters ASCII codes to binary)
@@ -494,7 +482,7 @@ print([fib(i) for i in range(10)]) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 Implement `itertools.islice(iterable, start, stop[, step])`
 ```python
 def islice(iterable, *args):
-	"""Return an iterator that returns selected elements from the iterable."""
+    """Return an iterator that returns selected elements from the iterable."""
     s = slice(*args)
     it = iter(xrange(s.start or 0, s.stop or sys.maxint, s.step or 1))
     nexti = next(it)
@@ -612,32 +600,6 @@ search.send("I love you")
 search.send("Don't you love me?")
 search.send("I love coroutines instead!")
 # I love coroutines instead!
-```
-
-Conway's Game of Life
-```python
-from itertools import islice
-
-def neighbors(cell):
-    x, y = cell
-    adj_coord = ((-1,-1),(0,-1),(1,-1),(-1,0),(1,0),(-1,1),(0,1),(1,1))
-    return ((x+dx, y+dy) for dx, dy in adj_coord)
-
-def iterations(board):
-    while True:
-        new_board = set([])
-        candidates = board.union(set(n for cell in board for n in neighbors(cell)))
-        for cell in candidates:
-            count = sum((n in board) for n in neighbors(cell))
-            if count == 3 or (count == 2 and cell in board):
-                new_board.add(cell)
-        board = new_board
-        yield board
-
-if __name__ == "__main__":
-    initial_board = {(0, 1), (1, 2), (2, 0), (2, 1), (2, 2)}
-    for board in islice(iterations(initial_board), 10):
-        print board
 ```
 
 Enum
