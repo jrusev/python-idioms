@@ -1,9 +1,3 @@
-> There should be one-- and preferably only one --obvious way to do it.
-
-> *Tim Peters, The Zen of Python (PEP 20)*
-
-[The Elements of Python Style](https://github.com/amontalenti/elements-of-python-style)
-
 Reverse a list
 ```python
 l = [0,1,2,3,4,5]
@@ -456,24 +450,6 @@ def fib(n):
 print([fib(i) for i in range(10)]) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
-Implement `itertools.islice(iterable, start, stop[, step])`
-```python
-def islice(iterable, *args):
-    """Return an iterator that returns selected elements from the iterable."""
-    s = slice(*args)
-    it = iter(xrange(s.start or 0, s.stop or sys.maxint, s.step or 1))
-    nexti = next(it)
-    for i, element in enumerate(iterable):
-        if i == nexti:
-            yield element
-            nexti = next(it)
-
-# islice('ABCDEFG', 2) --> A B
-# islice('ABCDEFG', 2, 4) --> C D
-# islice('ABCDEFG', 2, None) --> C D E F G
-# islice('ABCDEFG', 0, None, 2) --> A C E G
-```
-
 Deque (double-ended queue)
 ```python
 from collections import deque
@@ -496,18 +472,6 @@ a = ['a','b','c','d', 4]
 # `join` doesn't automatically convert ints to strings
 ','.join(str(x) for x in a)
 # 'a,b,c,d,4'
-```
-
-Peter Norvig's Spelling Corrector - http://norvig.com/spell-correct.html
-
-One-line Tree in Python (https://gist.github.com/hrldcpr/2012250)
-```python
-from collections import defaultdict
-tree = lambda: defaultdict(tree)
-
-t = tree()
-t['EURUSD']['bid'] = 1.1
-t['EURUSD']['ask'] = 1.2
 ```
 
 Largest and smallest elements
@@ -586,3 +550,5 @@ class Color:
 
 Color.GREEN # 1
 ```
+
+For inspiration, check Peter Norvig's Spelling Corrector - http://norvig.com/spell-correct.html
