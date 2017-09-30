@@ -423,7 +423,7 @@ a = ['a','b','c','d', 4]
 # 'a,b,c,d,4'
 ```
 
-Largest and smallest elements
+Largest and smallest elements with [heap](https://docs.python.org/2/library/heapq.html)
 ```python
 import heapq
 import random
