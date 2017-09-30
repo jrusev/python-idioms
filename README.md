@@ -283,7 +283,7 @@ try:
 except ValueError as e:
     print('Error: {}'.format(e))
 else:
-    print('Strange, sqrt(-1) did not raise and error!')
+    print('Strange, sqrt(-1) did not raise an error!')
 ```
 
 Split array into chunks
