@@ -449,11 +449,12 @@ def select(arr, k):
     """Return the k-th largest element in arr."""
     heap = []
     for x in arr:
-        heapq.heappush(heap, x)
+        heappush(heap, x)
         if len(heap) > k:
             heappop(heap)
     return heap[0]
-    
+
+
 n = 1000
 k = 10
 arr = random.sample(range(n), n)
