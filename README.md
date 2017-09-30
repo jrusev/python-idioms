@@ -425,14 +425,19 @@ a = ['a','b','c','d', 4]
 
 Largest and smallest elements with [heap](https://docs.python.org/2/library/heapq.html)
 ```python
-import heapq
+from heapq import nsmallest, nlargest
 import random
 
 a = [random.randint(0, 100) for _ in range(100)]
-heapq.nsmallest(5, a)
+nsmallest(5, a)
 # [3, 3, 5, 6, 8]
-heapq.nlargest(5, a)
+nlargest(5, a)
 # [100, 100, 99, 98, 98]
+# The latter two functions perform best for smaller values of n. For larger
+# values, it is more efficient to use the sorted() function. Also, when n==1,
+# it is more efficient to use the built-in min() and max() functions. If
+# repeated usage of these functions is required, consider turning the iterable
+# into an actual heap
 ```
 
 k-th largest with min-heap
