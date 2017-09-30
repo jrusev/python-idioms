@@ -168,13 +168,11 @@ Grouping with dictionaries
 from collections import defaultdict
 
 # Group names by name length
-names = ['raymond', 'rachel', 'matthew', 'roger',
-         'betty', 'melissa', 'judith', 'charlie']
+names = ['raymond', 'rachel', 'matthew', 'roger', 'betty', 'melissa', 'judith', 'charlie']
 
 d = defaultdict(list)
 for name in names:
-    key = len(name)
-    d[key].append(name)
+    d[len(name)].append(name)
 
 # {5: ['roger', 'betty'], 6: ['rachel', 'judith'], 7: ['raymond', 'matthew', 'melissa', 'charlie']}
 
@@ -182,7 +180,7 @@ for name in names:
 d = {}
 for name in names:
     key = len(name)
-    if key not in d: d[key] = []
+    d[key] = d.get(key, [])
     d[key].append(name)
 ```
 
