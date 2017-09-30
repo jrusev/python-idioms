@@ -386,7 +386,8 @@ def fib_gen(n):
         yield a
         a, b = b, a + b
 
-print(list(fib_gen(10))) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+list(fib_gen(10))
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 def fib(n):
     a, b = 0, 1
@@ -394,7 +395,8 @@ def fib(n):
         a, b = b, a + b
     return a
 
-print([fib(i) for i in range(10)]) # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+[fib(i) for i in range(10)]
+# [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
 Deque (double-ended queue)
@@ -451,43 +453,6 @@ n = 1000
 k = 10
 arr = random.sample(range(n), n)
 assert select(arr, k) == nlargest(k, arr)[-1] == 990
-```
-
-Generators and Coroutines
-```python
-# Generator
-def countdown(n):
-    print("Counting down from {}".format(n))
-    while n > 0:
-        yield n
-        n -= 1
-
-counter = countdown(10)
-print counter
-# <generator object countdown at 0x10dcd6b40>
-counter.next()
-# Counting down from 10
-# 10
-print [count for count in counter]
-# [9, 8, 7, 6, 5, 4, 3, 2, 1]
-
-# Coroutine
-def grep(pattern):
-    print("Searching for {}".format(pattern))
-    while True:
-        line = (yield)
-        if pattern in line:
-            print(line)
-
-search = grep('coroutine')
-print search
-# <generator object grep at 0x10dcd6be0>
-next(search)
-# Searching for coroutine
-search.send("I love you")
-search.send("Don't you love me?")
-search.send("I love coroutines instead!")
-# I love coroutines instead!
 ```
 
 Enum
