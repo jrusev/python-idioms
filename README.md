@@ -141,22 +141,6 @@ zip(*zip(a, b)) == [a, b]
 # True
 ```
 
-Sliding windows (n-grams) using zip and [islice](https://docs.python.org/2/library/itertools.html#itertools.islice)
-```python
-from itertools import islice
-def n_grams(a, n):
-	z = (islice(a, i, None) for i in range(n))
-	return zip(*z)
-
-a = [1, 2, 3, 4, 5, 6]
-n_grams(a, 3)
-# [(1, 2, 3), (2, 3, 4), (3, 4, 5), (4, 5, 6)]
-n_grams(a, 2)
-# [(1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]
-n_grams(a, 4)
-# [(1, 2, 3, 4), (2, 3, 4, 5), (3, 4, 5, 6)]
-```
-
 Timeit
 ```python
 import timeit
@@ -279,28 +263,6 @@ SUITS = ('Clubs', 'Diamonds', 'Hearts', 'Spades')
 DECK = tuple(Card(*card) for card in product(RANKS, SUITS))
 ```
 
-Interpose
-```python
-from itertools import islice, chain, repeat
-
-def interpose(seq, sep):
-    """Introduce sep between each pair of elements in seq."""
-    return islice(chain.from_iterable(zip(repeat(sep), seq)), 1, None)
-
-list(interpose([1, 2, 3], '-'))
-# [1, '-', 2, '-', 3]
-
-def interpose(seq, sep):
-    result = []
-    for x in seq:
-        result += [x, sep]
-    return result[:-1]
-
-interpose([1, 2, 3], '-')
-# [1, '-', 2, '-', 3]
-```
-
-
 Classes
 ```python
 class Person(object):
@@ -406,8 +368,6 @@ episodes = {
   'Episode VII': {'planets': ['Jakku', 'Takodana', 'Ahch-To']},
 }
 
-# from itertools import chain
-# planets = set(chain.from_iterable(e['planets'] for e in episodes.values()))
 planets = {p for e in episodes.values() for p in e['planets']}
 print('There are {} planets: {}'.format(len(planets), ', '.join(planets)))
 # There are 17 planets: Utapau, Ahch-To, Kamino, Bespin, Naboo, Jakku, Felucia, Tatooine, Mustafar, Takodana, Yavin 4, Alderaan, Endor, Dagobah, Hoth, Coruscant, Geonosis
