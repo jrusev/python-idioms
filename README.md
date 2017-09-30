@@ -141,7 +141,7 @@ zip(*zip(a, b)) == [a, b]
 # True
 ```
 
-Sliding windows (n-grams) using zip and iterators
+Sliding windows (n-grams) using zip and [islice](https://docs.python.org/2/library/itertools.html#itertools.islice)
 ```python
 from itertools import islice
 def n_grams(a, n):
