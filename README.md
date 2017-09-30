@@ -415,7 +415,7 @@ q.popleft()
 # 6
 ```
 
-Print a comma separated list of numbers
+Print a comma separated list of items
 ```python
 a = ['a','b','c','d', 4]
 # `join` doesn't automatically convert ints to strings
