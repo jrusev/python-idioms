@@ -201,13 +201,11 @@ sorted((-text.count(w), w) for w in set(text))
 # [(-4, 'i'), (-4, 's'), (-2, 'p'), (-1, 'M')]
 ```
 
-Sort letters from file by frequency
+Get all lowercase alphanumeric chars from a string
 ```python
-from collections import Counter
-with open('alice.txt') as f:
-    text = f.read().lower()
-    letters = (c for c in text if c.isalpha())
-    sorted(Counter(letters).items(), key=lambda x: -x[1])
+text = "Hi, John, this is me - Paul. What's up man?"
+''.join(ch.lower() for ch in text if ch.isalnum())
+# 'hijohnthisismepaulwhatsupman'
 ```
 
 Remove all spaces from string
@@ -230,15 +228,6 @@ text.split()
 import re
 re.split('\W+', text)
 # ['Hi', 'John', 'this', 'is', 'me', 'Paul', 'What', 's', 'up', 'man', '']
-```
-
-Sort words in text by frequency
-```python
-import re
-from collections import Counter
-text = open('alice.txt').read().lower()
-words = re.split('\W+', text)
-sorted_by_freq = Counter(words).most_common()
 ```
 
 Iterators for efficient looping
