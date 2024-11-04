@@ -5,7 +5,7 @@ l = [0,1,2,3,4,5]
 rev = l[::-1]
 
 # Get an iterator that walks the original list in reverse order.
-print list(x*2 for x in reversed(l))
+print([x*2 for x in reversed(l)])
 
 # Reverse in place.
 l.reverse()
@@ -16,19 +16,19 @@ Add element(s) to a list.
 # Append an item to the end.
 a = [1, 2, 3]
 a.append([4, 5]) # returns None
-print a
+print(a)
 # [1, 2, 3, [4, 5]]
 
 # Extend the list by appending items from iterable.
 a = [1, 2, 3]
 a.extend([4, 5]) # same as: a += [4, 5]
-print a
+print(a)
 # [1, 2, 3, 4, 5]
 
 # Insert a new item before a given position.
 a = [1, 2, 3]
 a.insert(1, '?')
-print a
+print(a)
 # [1, '?', 2, 3]
 ```
 
@@ -37,20 +37,20 @@ Remove element from a list.
 # To remove an element's first occurrence in a list:
 a = ['a', 'b', 'c', 'b']
 a.remove('b')
-print a
+print(a)
 # ['a', 'c', 'b']
 
 # Remove all occurences of an element in a list.
 a = [1, 2, 3, 4, 2]
 a = [x for x in a if x != 2]
-print a
+print(a)
 # [1, 3, 4]
 
 # Remove element by index.
 a = ['a', 'b', 'c', 'd']
 a.pop(1)
 # 'b'
-print a
+print(a)
 ['a', 'c', 'd']
 ```
 
@@ -58,9 +58,9 @@ Find element in a list
 ```python
 # Find the index of the first item found. Raises an error if item is not found.
 a = ['a', 'b', 'c', 'd', 'b']
-print a.index('b')
+print(a.index('b'))
 # 1
-print a.index('x')
+print(a.index('x'))
 # ValueError: 'x' is not in list
 
 # Find all occurences of an item.
@@ -70,7 +70,7 @@ indexes = [i for i, item in enumerate(a) if item == 'b']
 
 # Bad:
 i = a.index('x') if 'x' in a else None
-print i
+print(i)
 # None
 
 # Good:
@@ -96,13 +96,13 @@ List slice assignment
 ```python
 a = [1, 2, 3, 4, 5]
 a[2:3] = [0, 0]
-print a
+print(a)
 # [1, 2, 0, 0, 4, 5]
 a[1:1] = [8, 9] # insert
-print a
+print(a)
 # [1, 8, 9, 2, 0, 0, 4, 5]
 a[1:-1] = [] # delete
-print a
+print(a)
 # [1, 5]
 ```
 
@@ -113,9 +113,9 @@ Get all even numbers from a list located at even indexes
 
 Get the first item from an iterable matching a condition
 ```python
-print next((x for x in (1,2,3) if x > 1), None)
+print(next((x for x in (1,2,3) if x > 1), None))
 # 2
-print next((x for x in (1,2,3) if x > 3), None)
+print(next((x for x in (1,2,3) if x > 3), None))
 # None
 ```
 
@@ -129,7 +129,7 @@ Zipping and Unzipping
 a = [1, 2, 3]
 b = ['a', 'b', 'c']
 z = zip(a, b)
-print z
+print(z)
 # [(1, 'a'), (2, 'b'), (3, 'c')]
 
 zip(*z)
@@ -148,9 +148,9 @@ import timeit
 setup = 'import random;a = [random.random() for _ in xrange(100000)]'
 n = 1000
 
-print timeit.timeit('b=reversed(a)', setup, number=n) # 0.0002
-print timeit.timeit('a.reverse()', setup, number=n)   # 0.0600
-print timeit.timeit('b=a[::-1]', setup, number=n)     # 0.7700
+print(timeit.timeit('b=reversed(a)', setup, number=n)) # 0.0002
+print(timeit.timeit('a.reverse()', setup, number=n))   # 0.0600
+print(timeit.timeit('b=a[::-1]', setup, number=n))     # 0.7700
 ```
 
 Counter
@@ -235,7 +235,7 @@ https://docs.python.org/2.7/library/itertools.html
 
 ```python
 from itertools import combinations
-list(''.join(comb) for comb in combinations('ABCD', 3))
+[''.join(comb) for comb in combinations('ABCD', 3)]
 # ['ABC', 'ABD', 'ACD', 'BCD']
 ```
 
@@ -304,10 +304,10 @@ print(decoded)
 
 Print the alphabet
 ```python
-print ''.join(chr(i) for i in range(ord('a'),ord('z')+1))
+print(''.join(chr(i) for i in range(ord('a'),ord('z')+1)))
 
 import string
-print string.lowercase
+print(string.lowercase)
 ```
 
 Dict Comprehensions
@@ -386,7 +386,7 @@ def fib_gen(n):
         yield a
         a, b = b, a + b
 
-list(fib_gen(10))
+print(list(fib_gen(10)))
 # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 
 def fib(n):
@@ -395,7 +395,7 @@ def fib(n):
         a, b = b, a + b
     return a
 
-[fib(i) for i in range(10)]
+print([fib(i) for i in range(10)])
 # [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 ```
 
